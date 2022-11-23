@@ -1,17 +1,27 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.8.7;
+pragma solidity >0.4.11;
+
+// SPDX-License-Identifier: UNLICENSED
+
 contract Bank {
-   address public owner;
-   uint public balance;
-   constructor() {
-     owner = msg.sender;
-   }
-   function deposit() external payable {
-     balance += msg.value;
-   }
-   function withdraw(uint _amount) external {     
-     require(balance >= _amount, "Insufficient balance!");
-     payable(owner).transfer(_amount);
-     balance -= _amount;
-   }
+    uint256 balance;
+
+    // event Deposit(uint val);
+    // event Withdraw(uint val);
+
+    function deposit(uint256 amt) public returns (uint256) {
+        balance += amt;
+        return 1;
+    }
+
+    function withdraw(uint256 amt) public returns (uint256) {
+        if (amt > balance) {
+            return 0;
+        }
+        balance -= amt;
+        return 1;
+    }
+
+    function showBalance() public view returns (uint256) {
+        return balance;
+    }
 }
